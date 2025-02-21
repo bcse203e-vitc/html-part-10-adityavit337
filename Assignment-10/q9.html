@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Drawing App</title>
+</head>
+<body>
+    <h1>Drawing App</h1>
+    <label for="color">Select Color:</label>
+    <input type="color" id="color">
+    <label for="size">Brush Size:</label>
+    <input type="range" id="size" min="1" max="10" value="5">
+    <button onclick="clearCanvas()">Clear Canvas</button>
+    <canvas id="canvas" width="500" height="400" style="border:1px solid black;"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        let drawing = false;
+        canvas.addEventListener("mousedown", () => drawing = true);
+        canvas.addEventListener("mouseup", () => drawing = false);
+        canvas.addEventListener("mousemove", draw);
+        function draw(event) {
+            if (!drawing) return;
+            ctx.lineWidth = document.getElementById("size").value;
+            ctx.strokeStyle = document.getElementById("color").value;
+            ctx.lineCap = "round";
+            ctx.lineTo(event.offsetX, event.offsetY);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(event.offsetX, event.offsetY);
+        }
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</body>
+</html>
