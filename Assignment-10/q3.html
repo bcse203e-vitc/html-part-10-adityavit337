@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Order Form</title>
+    <script>
+        function submitOrder() {
+            let size = document.querySelector('input[name="size"]:checked').value;
+            let toppings = [];
+            document.querySelectorAll('input[name="topping"]:checked').forEach(topping => {
+                toppings.push(topping.value);
+            });
+            alert("You ordered a " + size + " pizza with " + (toppings.length > 0 ? toppings.join(", ") : "no toppings") + ".");
+        }
+    </script>
+</head>
+<body>
+    <h1>Pizza Order Form</h1>
+    <form onsubmit="event.preventDefault(); submitOrder();">
+        <h3>Select Pizza Size:</h3>
+        <label><input type="radio" name="size" value="Small" required> Small</label><br>
+        <label><input type="radio" name="size" value="Medium"> Medium</label><br>
+        <label><input type="radio" name="size" value="Large"> Large</label><br>
+        <h3>Select Toppings:</h3>
+        <label><input type="checkbox" name="topping" value="Cheese"> Cheese</label><br>
+        <label><input type="checkbox" name="topping" value="Pepperoni"> Pepperoni</label><br>
+        <label><input type="checkbox" name="topping" value="Mushrooms"> Mushrooms</label><br>
+        <label><input type="checkbox" name="topping" value="Olives"> Olives</label><br>
+        <button type="submit">Submit Order</button>
+    </form>
+</body>
+</html>
